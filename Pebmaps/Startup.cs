@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Pebmaps.Data;
+using PebMaps.Data;
+using PebMaps.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pebmaps
+namespace PebMaps
 {
     public class Startup
     {
@@ -28,7 +29,8 @@ namespace Pebmaps
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<StateService>();
+            services.AddSingleton<ElectionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

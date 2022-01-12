@@ -64,8 +64,4 @@
     <None Include="wwwroot\ui-elements.html" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Pebmaps\Pebmaps.csproj" />
-  </ItemGroup>
-
 </Project>

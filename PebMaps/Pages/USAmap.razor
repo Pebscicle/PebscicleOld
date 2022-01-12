@@ -1,0 +1,29 @@
+﻿@page "/usamap"
+
+@using PebMaps.Data
+@using PebMaps.Components 
+@inject StateService StateService
+
+<div style="width:100%;"><h1>270 to 270</h1></div>
+<svg viewBox="0 0 961.046 683.385">
+    @for (int i = 0; i < 50; i++ )
+    {
+        <StateUI Id="@states.ElementAt(i).Abbreviation" Data="@states.ElementAt(i)" Path="@StateService.getPathFromAbbreviation(states.ElementAt(i).Abbreviation)"></StateUI>
+    }
+</svg>
+
+@code {
+    private List<State> states = new List<State>();
+    private List<StateUI> stateUIs = new List<StateUI>();
+    private int counter = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        states = await StateService.GetUSStates();
+        /*(for (int i = 0; i < 50; i++)
+        {
+            stateUIs.Add(new StateUI { Id = states.ElementAt(i).Abbreviation, Data = states.ElementAt(i), Path = StateService.getPathFromAbbreviation(states.ElementAt(i).Abbreviation) });
+        }*/
+    }
+}
