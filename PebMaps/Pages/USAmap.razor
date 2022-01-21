@@ -1,14 +1,16 @@
 ﻿@page "/usamap"
 
 @using PebMaps.Data
-@using PebMaps.Components 
+@using PebMaps.Components
+@using PebMaps.Services 
 @inject StateService StateService
 
-<div style="width:100%;"><h1>270 to 270</h1></div>
+<div style="width:100%;"><TwoSeventyMeter @ref="twoSeventyMeter"></TwoSeventyMeter></div>
 <svg viewBox="0 0 961.046 683.385">
     @for (int i = 0; i < 50; i++ )
     {
-        <StateUI Id="@states.ElementAt(i).Abbreviation" Data="@states.ElementAt(i)" Path="@StateService.getPathFromAbbreviation(states.ElementAt(i).Abbreviation)"></StateUI>
+        //@onclick="() => addState(states.ElementAt(i))"
+        <StateUI  @bind="BackgroundColor" @bind:event="oninput" Id="@states.ElementAt(i).Abbreviation" Data="@states.ElementAt(i)" Path="@StateService.getPathFromAbbreviation(states.ElementAt(i).Abbreviation)"></StateUI>
     }
 </svg>
 
@@ -16,14 +18,25 @@
     private List<State> states = new List<State>();
     private List<StateUI> stateUIs = new List<StateUI>();
     private int counter = 0;
+    private TwoSeventyMeter twoSeventyMeter { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
 
         states = await StateService.GetUSStates();
-        /*(for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++)
         {
-            stateUIs.Add(new StateUI { Id = states.ElementAt(i).Abbreviation, Data = states.ElementAt(i), Path = StateService.getPathFromAbbreviation(states.ElementAt(i).Abbreviation) });
-        }*/
+            stateUIs.Add(new StateUI { Id = states.ElementAt(i).Abbreviation, Data = states.ElementAt(i), Path = StateService.getPathFromAbbreviation(states.ElementAt(i).Abbreviation)});
+        }
     }
+
+    protected void addState(State state)
+    {
+        if (stateUIs.Exists(x => x.Id.Equals(state.Abbreviation)))
+        {
+            Console.WriteLine("state matched" + state.Name);
+        }
+        //twoSeventyMeter
+    }
+
 }

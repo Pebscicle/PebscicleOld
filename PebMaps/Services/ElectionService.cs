@@ -7,5 +7,7 @@ namespace PebMaps.Services
 {
     public class ElectionService
     {
+        public List<string> redStates { get; set; }
+        public List<string> blueStates { get; set; }
     }
 }

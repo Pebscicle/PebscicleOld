@@ -9,7 +9,12 @@ namespace PebMaps.Components
         [Parameter] public string Id { get; set; }
         [Parameter] public string Path { get; set; }
         [Parameter] public State Data { get; set; }
-        public string BackgroundColor { get; set; } = "red";
+        public string BackgroundColor 
+        {
+            get;
+            set;
+        }
+
         private static string Style { get; set; } = "cursor:pointer;";
 
         protected override void OnInitialized()
